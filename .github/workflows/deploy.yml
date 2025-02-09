@@ -1,0 +1,17 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to Server
+        run: |
+          ssh user@server "cd /var/www/my-monorepo && git pull && npm install && pm2 restart all"
